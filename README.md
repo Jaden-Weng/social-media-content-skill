@@ -1,2 +1,43 @@
-# social-media-content-skill
-AI-powered skill for generating platform-specific social media content from a single event brief.
+# 多平台雇主品牌内容 Skill
+
+将一份活动简报转换成小红书、脉脉与内部员工账号的差异化宣传文案和配图建议。适用于雇主品牌、企业文化与员工沟通工作。
+
+这是一个基于指令与参考资料的本地 Agent Skill，不是独立应用，不包含自动发帖服务，也不需要 API 密钥。输出质量取决于输入事实与所用模型。
+
+## 安装与使用
+
+将本文件所在的 `employer-brand-content` 完整文件夹复制到个人目录 `~/.agents/skills/`，使入口为 `~/.agents/skills/employer-brand-content/SKILL.md`。如果从 GitHub 下载 ZIP，注意去掉仓库外层目录，避免重复嵌套。若未识别新 skill，重启 Codex。
+
+在聊天中输入：
+
+```text
+请使用 $employer-brand-content。
+品牌：我提供的品牌资料如下……
+活动名称：跨团队交流日
+阶段：回顾
+事实：同事分组讨论协作问题，用纸卡整理建议。
+平台：小红书、脉脉、内部账号
+素材：无，请给选图建议。
+公开范围：主题和形式可公开，内部安排不外发。
+行动：邀请留言分享经验，不添加招聘。
+```
+
+首次使用可填写 [品牌档案](references/brand-profile.md)，后续用 [活动简报](references/activity-brief.md)。真实品牌资料建议保存在私有工作目录，不提交到公开仓库。
+
+## 默认交付与设计
+
+每个平台包含两个标题、一版正文、行动引导及配图顺序与选图建议。平台适配改变切入点、信息排序和受众价值，不只替换表情。按当次公开范围区分内外信息；事实缺口显式标注，不补造数据或员工评价。
+
+- `SKILL.md`：通用工作流和输出约定。
+- `references/`：平台策略、品牌模板、活动模板、视觉指南、虚构示例。
+- `assets/`：原创 SVG 演示素材，无企业标识或人物照片。
+- `agents/`：仅包含展示名称和默认调用提示，无凭据、内部地址或服务依赖。
+- `tests/`：行为验收场景和静态结构检查。
+
+完整输入输出见 [虚构演示](references/simulated-example.md)。示例均不对应真实公司，不应作为真实活动报道发布。
+
+## 检查与局限
+
+在仓库根目录执行 `python3 tests/validate_package.py`，检查入口、资源链接、演示素材和安全的配置字段。行为测试按 [验收场景](tests/behavior-cases.md) 手工执行；静态检查不代表模型效果已通过验证，也不能证明不存在所有潜在敏感信息。
+
+项目未提供真实企业传播效果、效率提升百分比或自动发布能力。用于简历时，可描述品牌规则参数化、多平台内容适配、公开范围控制及可复用技能封装，不应将虚构演示写成真实运营业绩。
